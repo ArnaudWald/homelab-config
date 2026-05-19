@@ -5,6 +5,7 @@ arr_suite/*
 
 # # Beszel for monitoring
 beszel/*
+!beszel/.env.example
 !beszel/compose.yml
 
 # # File browser
