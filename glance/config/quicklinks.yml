@@ -179,7 +179,12 @@
               "/app/config":
                 name: Root
                 hide: false
-
+              "/tank/immich":
+                name: "Tank: Photos"
+                hide: false
+              "/tank/seafile":
+                name: "Tank: Cloud"
+                hide: false
       - type: dns-stats
         service: pihole-v6
         hour-format: 24h
