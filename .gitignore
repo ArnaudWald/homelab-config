@@ -1,16 +1,16 @@
 # Arr Suite folders
 arr_suite/*
-!arr_suite/compose.yaml
+!arr_suite/docker-compose.yaml
 !arr_suite/.env.example
 
 # # Beszel for monitoring
 beszel/*
 !beszel/.env.example
-!beszel/compose.yml
+!beszel/docker-compose.yaml
 
 # # File browser
 file-browser/*
-!file-browser/compose.yml
+!file-browser/docker-compose.yaml
 
 # Glance Homepage
 glance/.env
