@@ -34,9 +34,14 @@ services:
       - 6789:6789 # nzbget
       - 9696:9696 # prowlarr
       - 8191:8191 # flaresolverr
+      - 8000:8000 # Gluetun Control Server Port
+    environment:
+      - HTTP_CONTROL_SERVER_ADDRESS=0.0.0.0:8000 # Ensures it listens on all interfaces
     volumes:
       - ./gluetun:/gluetun
-    # Make a '.env' file in the same directory.
+      - type: bind
+        source: ./config.toml
+        target: /gluetun/auth/config.toml    # Make a '.env' file in the same directory.
     env_file:
       - .env
     healthcheck:
