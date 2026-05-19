@@ -35,6 +35,9 @@ proxy/data
 proxy/letsencrypt
 proxy/.env
 
+# Seafile
+seafile/.env
+
 # # Speedtest
 speedtest-tracker/data
 speedtest-tracker/ssl-keys

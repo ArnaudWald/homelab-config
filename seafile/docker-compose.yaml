@@ -1,0 +1,45 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: seafile-mysql
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - MYSQL_LOG_CONSOLE=true
+      - MARIADB_AUTO_UPGRADE=1
+    volumes:
+      - /tank/seafile/mysql:/var/lib/mysql
+    networks:
+      - seafile-net
+
+  memcached:
+    image: memcached:1.6.18
+    container_name: seafile-memcached
+    entrypoint: memcached -m 256
+    restart: unless-stopped
+    networks:
+      - seafile-net
+          
+  seafile:
+    image: seafileltd/seafile-mc:11.0-latest
+    container_name: seafile
+    restart: unless-stopped
+    ports:
+      - "8011:80"
+      # - "443:443"
+    volumes:
+      - /tank/seafile/data:/shared    
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+      - TIME_ZONE=Europe/Paris
+    depends_on:
+      - db
+      - memcached
+    networks:
+      - seafile-net
+
+networks:
+  seafile-net:
