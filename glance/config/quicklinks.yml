@@ -1,0 +1,185 @@
+- name: ${SERVER_NAME}
+  # width: slim
+  hide-desktop-navigation: true
+  # center-vertically: true
+  # icon: si:immich # si for Simple icons https://simpleicons.org/
+  # icon: sh:immich # sh for selfh.st icons https://selfh.st/icons/
+  # icon: di:immich # di for Dashboard icons https://dashboardicons.com/
+  # icon: mdi:camera # mdi for Material Design icons https://pictogrammers.com/library/mdi/
+
+  head-widgets:
+
+  - type: search
+    autofocus: true
+    search-engine: google
+    new-tab: true
+
+  columns:
+
+    - size: small
+      widgets:
+        - type: clock
+          hour-format: 24h
+        - type: calendar
+          first-day-of-week: monday
+        - type: weather
+          units: metric
+          hour-format: 24h
+          location: ${WEATHER_LOCATION}
+
+    - size: full
+      widgets:
+
+        - type: monitor
+          cache: 1m
+          title: Management
+          sites:
+          - title: Home Assistant
+            url: https://home.${INTERNAL_DOMAIN}
+            check-url: http://${HA_GREEN_IP}:8123
+            icon: di:home-assistant
+          - title: File Browser
+            url: https://files.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:8095
+            icon: di:filebrowser
+          - title: Portainer
+            url: https://docker.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:9443
+            icon: di:portainer
+            alt-status-codes:
+              - 403
+              - 401
+              - 400
+
+        - type: monitor
+          cache: 1m
+          title: Documents
+          sites:
+          - title: Paperless-ngx
+            url: https://paperless.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:8010
+            icon: di:paperless
+          - title: Immich
+            url: https://immich.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:5055
+            icon: di:immich
+
+        - type: monitor
+          cache: 1m
+          title: Media
+          sites:
+          - title: Jellyfin
+            url: https://jellyfin.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:8096
+            icon: di:jellyfin
+          - title: Seerr
+            url: https://seerr.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:5055
+            icon: di:seerr
+          - title: MeTube
+            url: https://metube.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:8081
+            icon: di:metube
+
+        - type: monitor
+          cache: 1m
+          title: Download Clients
+          sites:
+          - title: qBittorrent
+            url: https://torrent.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:8080
+            icon: di:qbittorrent
+
+          - title: NZBGet
+            url: https://nzbget.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:6789
+            icon: di:nzbget
+            alt-status-codes:
+              - 403
+              - 401
+          - title: Prowlarr
+            url: https://prowlarr.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:9696
+            icon: di:prowlarr
+
+        - type: monitor
+          cache: 1m
+          title: ARR Suite
+          sites:
+          - title: Radarr (movies)
+            url: https://radarr.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:7878
+            icon: di:radarr
+          - title: Sonarr (series)
+            url: https://sonarr.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:8989
+            icon: di:sonarr
+          - title: Bazarr (subtitles)
+            url: https://bazarr.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:6767
+            icon: di:bazarr
+        
+        - type: monitor
+          cache: 1m
+          title: Monitoring
+          sites:
+          - title: Beszel
+            url: https://monitoring.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:8090
+            icon: di:beszel
+          - title: Speedtest Tracker
+            url: https://speedtest.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:81
+            icon: di:myspeed
+          - title: Cockpit
+            url: https://cockpit.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:9090
+            allow-insecure: true
+            icon: di:cockpit
+            alt-status-codes:
+              - 403
+              - 401
+              - 301
+
+        - type: monitor
+          cache: 1m
+          title: Networking
+          sites:
+          - title: Livebox
+            url: http://${LIVEBOX_IP}
+            icon: di:orange
+          - title: Pi-hole
+            url: https://pihole.${INTERNAL_DOMAIN}/admin
+            check-url: http://${PI_ZERO_IP}/admin
+            icon: di:pi-hole
+          - title: NGINX Proxy Manager
+            url: https://proxy.${INTERNAL_DOMAIN}
+            check-url: http://${SERVER_IP}:81
+            icon: di:nginx-proxy-manager 
+        
+
+    - size: small
+      widgets:
+
+
+      - type: server-stats
+        servers:
+          - type: local
+            name: ${SERVER_NAME}
+            hide-swap: true
+            hide-mountpoints-by-default: true
+            mountpoints:
+              "/data":
+                name: SSD
+                hide: false
+              "/app/config":
+                name: Root
+                hide: false
+
+      - type: dns-stats
+        service: pihole-v6
+        hour-format: 24h
+        url: https://pihole.${INTERNAL_DOMAIN}
+        password: ${PIHOLE_PASSWORD}
+
+      - type: to-do

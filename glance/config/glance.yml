@@ -1,0 +1,28 @@
+server:
+  assets-path: /app/assets
+
+branding:
+  app-name: ${SERVER_NAME}
+  hide-footer: false
+  favicon-url: /assets/server-network-outline-custom.png
+
+document:
+  head: |
+    <div style="width: 100%; padding-top: 30px; text-align: center;">
+      <h1 style="font-size: 48px; margin: 0;">${GREETING}</h1>
+    </div>
+
+
+theme:
+  light: true
+  background-color: 220 23 95
+  contrast-multiplier: 1.0
+  primary-color: 220 91 54
+  positive-color: 109 58 40
+  negative-color: 347 87 44
+  
+pages:
+  # It's not necessary to create a new file for each page and include it, you can simply
+  # put its contents here, though multiple pages are easier to manage when separated
+  - $include: quicklinks.yml
+  # - $include: home.yml
