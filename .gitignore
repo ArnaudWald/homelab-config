@@ -1,0 +1,40 @@
+# Arr Suite folders
+arr_suite/*
+!arr_suite/compose.yaml
+!arr_suite/.env.example
+
+# # Beszel for monitoring
+beszel/*
+!beszel/compose.yml
+
+# # File browser
+file-browser/*
+!file-browser/compose.yml
+
+# Glance Homepage
+glance/.env
+
+# #Immich
+immich/.env
+immich/model-cache
+
+# # Jellyfin
+jellyfin/.env
+jellyfin/jellyseerr.old
+
+# # Paperless-ngx
+paperless/redisdata
+paperless/docker-compose.env
+
+# # Portainer
+portainer/portainer_data
+
+# # NGINX Proxy
+proxy/data
+proxy/letsencrypt
+proxy/.env
+
+# # Speedtest
+speedtest-tracker/data
+speedtest-tracker/ssl-keys
+speedtest-tracker/.env
