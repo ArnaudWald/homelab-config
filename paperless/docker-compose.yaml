@@ -1,0 +1,40 @@
+services:
+  broker:
+    image: docker.io/library/redis:8
+    restart: unless-stopped
+    container_name: paperless_redis
+    command:
+      - redis-server
+      - --port
+      - "6380"
+    volumes:
+      - ./redisdata:/data
+  db:
+    image: docker.io/library/postgres:18
+    container_name: paperless_db
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    volumes:
+      - /tank/documents/pgdata:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    container_name: paperless_webserver
+    depends_on:
+      - db
+      - broker
+    ports:
+      - "8010:8000"
+    volumes:
+      - /tank/documents/data:/usr/src/paperless/data
+      - /tank/documents/media:/usr/src/paperless/media
+      - /tank/documents/consume:/usr/src/paperless/consume
+    env_file: docker-compose.env
+    environment:
+      PAPERLESS_REDIS: redis://broker:6380
+      PAPERLESS_DBHOST: db
