@@ -133,7 +133,7 @@
             icon: di:beszel
           - title: Speedtest Tracker
             url: https://speedtest.${INTERNAL_DOMAIN}
-            check-url: http://${SERVER_IP}:81
+            check-url: http://${SERVER_IP}:8472
             icon: di:myspeed
           - title: Cockpit
             url: https://cockpit.${INTERNAL_DOMAIN}
