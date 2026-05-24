@@ -1,0 +1,18 @@
+services:
+  watchyourlan:
+    image: aceberg/watchyourlan:latest
+    container_name: watchyourlan
+    network_mode: host
+    env_file:
+      - .env
+    environment:
+      # - PUID=1000
+      # - PGID=1000
+      - TZ=Europe/Paris
+      - IFACES=enp1s0
+      - TIMEOUT=30
+      - PORT=8840
+      - LOG_LEVEL=info
+    volumes:
+      - ./config:/data
+    restart: unless-stopped
