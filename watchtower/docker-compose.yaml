@@ -1,3 +1,4 @@
+
 services:
   watchtower:
     container_name: watchtower
@@ -9,3 +10,7 @@ services:
       - .env
     environment:
       WATCHTOWER_CLEANUP: true
+      WATCHTOWER_NOTIFICATION_SPLIT_BY_CONTAINER: true
+      WATCHTOWER_UPDATE_ON_START: true
+      TZ: Europe/Paris
+
