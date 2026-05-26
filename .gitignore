@@ -3,12 +3,7 @@ arr_suite/*
 !arr_suite/docker-compose.yaml
 !arr_suite/.env.example
 
-# # Beszel for monitoring
-beszel/*
-!beszel/.env.example
-!beszel/docker-compose.yaml
-
-# # File browser
+# File browser
 file-browser/*
 !file-browser/docker-compose.yaml
 

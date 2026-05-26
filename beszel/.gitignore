@@ -1,0 +1,6 @@
+beszel_*/*
+
+.env.agent
+!.env.agent.example
+.env.server
+!.env.server.example
