@@ -135,6 +135,8 @@
             url: https://speedtest.${INTERNAL_DOMAIN}
             check-url: http://${SERVER_IP}:8472
             icon: di:myspeed
+            alt-status-codes:
+              - 400
           - title: Cockpit
             url: https://cockpit.${INTERNAL_DOMAIN}
             check-url: http://${SERVER_IP}:9090
