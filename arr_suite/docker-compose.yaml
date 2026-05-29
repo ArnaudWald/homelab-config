@@ -218,3 +218,41 @@ services:
       servarrnetwork:
         ipv4_address: 172.39.0.9
     restart: unless-stopped
+
+  maintainerr:
+    image: ghcr.io/maintainerr/maintainerr:latest
+    container_name: maintainerr
+    user: ${PUID}:${PGID}
+    env_file:
+      - .env
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./maintainerr:/opt/data
+    ports:
+      - 6246:6246
+    networks:
+      servarrnetwork:
+        ipv4_address: 172.39.0.10
+    restart: unless-stopped
+
+  cleanuparr:
+    image: ghcr.io/cleanuparr/cleanuparr:latest
+    container_name: cleanuparr
+    env_file:
+      - .env
+    environment:
+      - PORT=11011
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./cleanuparr:/config
+    ports:
+      - 11011:11011 
+    networks:
+      servarrnetwork:
+        ipv4_address: 172.39.0.11
+    restart: unless-stopped
